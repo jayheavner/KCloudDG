@@ -1,0 +1,33 @@
+<template>
+  <div class="container">
+    <page-header />
+    <policy-repeater />
+    <link-button 
+      text="Load More" 
+      :link="`/${language}/all-policy`"
+    />
+    <newsletter/>
+    <nav-items />
+  </div>
+</template>
+
+<script>
+import PageHeader from './PageHeader'
+import PolicyRepeater from './PolicyRepeater'
+import LinkButton from './LinkButton'
+import Newsletter from './Newsletter'
+import NavItems from './NavItems'
+
+export default {
+  name: 'Home',
+  props: ['language'],
+  components: {
+    PageHeader,
+    PolicyRepeater,
+    LinkButton,
+    Newsletter,
+    NavItems,
+  },
+}
+</script>
+

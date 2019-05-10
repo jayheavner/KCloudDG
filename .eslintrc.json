@@ -10,9 +10,10 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:vue/essential"
+    "plugin:vue/recommended"
   ],
   "rules": {
+    "no-debugger": "error",
     "indent": [
       "error",
       2
@@ -23,7 +24,7 @@
     ],
     "vue/html-indent": [
       "error",
-      4,
+      2,
       {
         "attribute": 1,
         "closeBracket": 0,

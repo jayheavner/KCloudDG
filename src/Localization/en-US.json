@@ -25,7 +25,8 @@
         "articlesLinkTitle": "Articles",
         "aboutLinkTitle": "About us",
         "cafesLinkTitle": "Cafes",
-        "contactsLinkTitle": "Contact"
+        "contactsLinkTitle": "Contact",
+        "policyLinkTitle": "Policy"
     },
     "Store": {
         "coffeesLinkTitle": "Coffees",

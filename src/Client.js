@@ -21,6 +21,7 @@ import { Home } from './Models/Home'
 import { HostedVideo } from './Models/HostedVideo'
 import { Office } from './Models/Office'
 import { Tweet } from './Models/Tweet'
+import { Policy } from './Models/Policy'
 
 // configure type resolvers
 let typeResolvers = [
@@ -36,7 +37,8 @@ let typeResolvers = [
   new TypeResolver('home', () => new Home()),
   new TypeResolver('hosted_video', () => new HostedVideo()),
   new TypeResolver('office', () => new Office()),
-  new TypeResolver('tweet', () => new Tweet())
+  new TypeResolver('tweet', () => new Tweet()),
+  new TypeResolver('policy', () => new Policy())
 ];
 
 const cookies = new Cookies(document.cookies);

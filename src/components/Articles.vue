@@ -1,43 +1,42 @@
 <template>
-    <div class="container">
-        <template  v-for="(article, index) in articlesData">
-            <div :key="article.id">
-                <div
-                    v-if="index % 4 === 0"
-                    class="clear"
-                >
-                </div>
-                <div class="col-md-3" >
-                    <div class="article-tile">
-                        <router-link :to="article.link">
-                            <img
-                                v-if="article.imageLink"
-                                :alt="'Article '  + article.title"
-                                class="article-tile-image"
-                                :src="article.imageLink"
-                                :title="'Article ' + article.title"
-                            />
-                            <span 
-                                v-else 
-                                class="article-tile-image"
-                            >{{ $t('Article.noTeaserValue') }}</span>
-                        </router-link>
-                        <div class="article-tile-date">
-                            {{article.postDate}}
-                        </div>
-                        <div class="article-tile-content">
-                            <h2 class="h4">
-                                <router-link :to="article.link">{{article.title}}</router-link>
-                            </h2>
-                            <p class="article-tile-text">
-                                {{article.summary}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <template v-for="(article, index) in articlesData">
+      <div :key="article.id">
+        <div
+          v-if="index % 4 === 0"
+          class="clear"
+        />
+        <div class="col-md-3" >
+          <div class="article-tile">
+            <router-link :to="article.link">
+              <img
+                v-if="article.imageLink"
+                :alt="'Article ' + article.title"
+                class="article-tile-image"
+                :src="article.imageLink"
+                :title="'Article ' + article.title"
+              >
+              <span 
+                v-else 
+                class="article-tile-image"
+              >{{ $t('Article.noTeaserValue') }}</span>
+            </router-link>
+            <div class="article-tile-date">
+              {{ article.postDate }}
             </div>
-        </template>
-    </div>
+            <div class="article-tile-content">
+              <h2 class="h4">
+                <router-link :to="article.link">{{ article.title }}</router-link>
+              </h2>
+              <p class="article-tile-text">
+                {{ article.summary }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -70,17 +69,6 @@ export default {
       dateFormat.i18n = dateFormats[this.language] || dateFormats[0];
     }
   },
-  methods: {
-    formatDate: function(value) {
-      return value ? dateFormat(value, 'mmmm d') : this.$t('Article.noPostDateValue');
-    },
-    onChange: function() {
-      this.articles = ArticleStore.getArticles(
-        this.articleCount,
-        this.language
-      );
-    }
-  },
   mounted: function() {
     ArticleStore.subscribe();
     ArticleStore.addChangeListener(this.onChange);
@@ -93,6 +81,17 @@ export default {
   },
   destroyed: function() {
     ArticleStore.removeChangeListener(this.onChange);
-  }
+  },
+  methods: {
+    formatDate: function(value) {
+      return value ? dateFormat(value, 'mmmm d') : this.$t('Article.noPostDateValue');
+    },
+    onChange: function() {
+      this.articles = ArticleStore.getArticles(
+        this.articleCount,
+        this.language
+      );
+    }
+  },
 };
 </script>

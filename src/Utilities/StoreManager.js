@@ -3,13 +3,15 @@ import * as BrewerStore from '../Stores/Brewer';
 import * as CafeStore from '../Stores/Cafe';
 import * as CoffeeStore from '../Stores/Coffee';
 import * as FactStore from '../Stores/Fact';
+import * as PolicyStore from '../Stores/Policy';
 
 const allStores = [
   ArticleStore,
   BrewerStore,
   CafeStore,
   CoffeeStore,
-  FactStore
+  FactStore,
+  PolicyStore
 ];
 
 const resetStores = () => allStores.forEach(store => store.resetStore());

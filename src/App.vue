@@ -1,20 +1,20 @@
 <template>
-    <div 
-        v-if="this.$route.path.toLowerCase() !== projectConfigurationPath.toLowerCase()" 
-        id="app" 
-        class="application-content"
-    >
-        <Header 
-            :language="language" 
-            :changeLang="changeLang" 
-            :infoMessageText="infoMessageText"
-        />
-        <router-view :language="language"/>
-        <Footer :language="language"/>
-    </div>
-    <div v-else>
-        <router-view/>
-    </div>
+  <div 
+    v-if="this.$route.path.toLowerCase() !== projectConfigurationPath.toLowerCase()" 
+    id="app" 
+    class="application-content"
+  >
+    <Header 
+      :language="language" 
+      :changeLang="changeLang" 
+      :infoMessageText="infoMessageText"
+    />
+    <router-view :language="language"/>
+    <Footer :language="language"/>
+  </div>
+  <div v-else>
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -33,13 +33,10 @@ import {
 } from './Utilities/LanguageCodes';
 
 export default {
-  name: 'app',
-  beforeCreate(){
-    const cookies = new Cookies(document.cookie);
-    const projectId = cookies.get(selectedProjectCookieName)
-    if (!projectId) {
-      this.$router.push(projectConfigurationPath);
-    }
+  name: 'App',
+  components: {
+    Header,
+    Footer
   },
   data: () => ({
     infoMessageText : '',
@@ -50,9 +47,32 @@ export default {
       return this.$i18n.locale;
     }
   },
-  components: {
-    Header,
-    Footer
+  watch: {
+    $route: {
+      deep: true,
+      handler: function() {
+        this.infoMessageText = this.getInfoMessage();
+        const newLanguage = this.$route.path.split('/')[1];
+        if (
+          this.language === newLanguage ||
+          languageCodesLowerCase.indexOf(newLanguage.toLocaleLowerCase()) < 0
+        ) {
+          return;
+        }
+        if (
+          languageCodesLowerCase.indexOf(newLanguage.toLocaleLowerCase()) > -1
+        ) {
+          this.$router.go(this.$route.path);
+        }
+      }
+    }
+  },
+  beforeCreate(){
+    const cookies = new Cookies(document.cookie);
+    const projectId = cookies.get(selectedProjectCookieName);
+    if (!projectId) {
+      this.$router.push(projectConfigurationPath);
+    }
   },
   created: function() {
     this.$i18n.locale = getLanguageCode(this.$route.path);
@@ -83,25 +103,5 @@ export default {
       this.$i18n.locale = newLanguage;
     }
   },
-  watch: {
-    $route: {
-      deep: true,
-      handler: function() {
-        this.infoMessageText = this.getInfoMessage();
-        const newLanguage = this.$route.path.split('/')[1];
-        if (
-          this.language === newLanguage ||
-          languageCodesLowerCase.indexOf(newLanguage.toLocaleLowerCase()) < 0
-        ) {
-          return;
-        }
-        if (
-          languageCodesLowerCase.indexOf(newLanguage.toLocaleLowerCase()) > -1
-        ) {
-          this.$router.go(this.$route.path);
-        }
-      }
-    }
-  }
 };
 </script>
