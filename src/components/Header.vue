@@ -48,18 +48,6 @@
       v-if="infoMessageText"
       :message="infoMessageText"
     />
-    <div class="header-row">
-      <div class="container">
-        <div class="col-xs-8 col-md-8 col-lg-4 logo">
-          <h1 class="logo">
-            <router-link
-              class="logo-link"
-              :to="homeRoute"
-            >Dancing Goat</router-link>
-          </h1>
-        </div>
-      </div>
-    </div>
   </header>
 </template>
 
