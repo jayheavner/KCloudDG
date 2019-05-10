@@ -16,7 +16,6 @@
               :element="policy.excerpt"
               class="hidden-md-down"
             />
-            {{ policy.link }}
             <div class="learn-more">Learn More &gt;</div>
             <img 
               :src="policy.image" 
